@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged } from '../actions';
+import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class LoginForm extends Component {
@@ -9,13 +9,18 @@ class LoginForm extends Component {
 		this.props.emailChanged(text);
 	}
 
-	onPasswordChange(text) {
-		this.props.passwordChanged(text);
+	onPasswordChange(password) {
+		this.props.passwordChanged(password);
+	}
+
+	onButtonPress() {
+		const { email, password } = this.props;
+		this.props.loginUser(email, password); 
 	}
 
 	render() {
 		console.log(this.props)
-		console.log(this.state)
+		console.log(this.props.email)
 		return (
 			<Card>
 				<CardSection>
@@ -23,7 +28,9 @@ class LoginForm extends Component {
 						label="Email"
 						placeholder="Your email"
 						onChangeText={this.onEmailChange.bind(this)}
-						value={this.props.email}	
+						value={this.props.email}
+						autoCorrect={false}
+						autoCapitalize='none'	
 					/>
 				</CardSection>
 				<CardSection>
@@ -36,20 +43,35 @@ class LoginForm extends Component {
 					/>
 				</CardSection>
 				<CardSection>
-					<Button>
+					<Button onPress={this.onButtonPress.bind(this)}>
 						Login
 					</Button>
+					
+				</CardSection>
+				<CardSection>
+					<Text style={styles.error}>
+					{this.props.error}
+					</Text>
+
 				</CardSection>
 			</Card>
 		);
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		email: state.auth.email,
-		password: state.auth.password
-	};
+const styles = {
+	error: {
+		color: 'red',
+		fontSize: 18,
+		flex: 1,
+		alignItems: 'center',
+		textAlign: 'center'
+	}
+}
+
+const mapStateToProps = ({ auth }) => {
+	const { email, password, error } = auth;
+	return { email, password, error };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);
