@@ -12,15 +12,8 @@ const RouterComponent = () => {
 				<Stack key="main" >
 					<Scene key="login" component={LoginForm} title="Please Login" initial />
 				</Stack>
-				
-					<Scene 
-					key="employeeList" 
-					component={EmployeeList} 
-					title="Employee List" 
-					
-					/>
+					<Scene key="employeeList" component={EmployeeList} title="Employee List" />
 					<Scene key='employeeCreate' component={EmployeeCreate} title="Employee Form" />
-				
 			</Stack>
 		</Router>
 	);

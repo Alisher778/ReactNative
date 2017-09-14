@@ -35,5 +35,5 @@ const loginUserFail = (dispatch) => {
 const loginUserFunction = (dispatch, user) => {
 	dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
 
-	Actions.employeeCreate();
+	Actions.employeeList();
 };
