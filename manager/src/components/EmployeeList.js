@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import { Text, View } from 'react-native';
+
 
 class EmployeeList extends Component {
 	render() {
