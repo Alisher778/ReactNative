@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Picker, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { employeeUpdate } from '../actions';
@@ -27,8 +27,21 @@ class EmployeeCreate extends Component {
 					/>
 				</CardSection>
 
-				<CardSection>
-					<Input />
+				<CardSection style={{ flexDirection: 'column' }}>
+					<Text style={{ alignSelf: 'flex-start', fontSize: 18 }}>Shift</Text>
+					<Picker 
+						selectedValue={this.props.shift}
+						onValueChange={text => this.props.employeeUpdate({ prop: 'shift', value: text })}
+						style={{ flex: 1 }}
+					>
+						<Picker.Item label="Monday" value="Monday" />
+						<Picker.Item label="Tuesday" value="Tuesday" />
+						<Picker.Item label="Wednesday" value="Wednesday" />
+						<Picker.Item label="Thursday" value="Thursday" />
+						<Picker.Item label="Friday" value="Friday" />
+						<Picker.Item label="Saturday" value="Saturday" />
+						<Picker.Item label="Sunday" value="Sunday" />
+					</Picker>
 				</CardSection>
 
 				<CardSection>

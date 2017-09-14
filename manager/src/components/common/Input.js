@@ -5,7 +5,7 @@ import { Text, TextInput, View } from 'react-native';
 const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
 	return (
 		<View style={{ width: '100%' }}>
-			<Text style={{ marginBottom: 10 }}>{label}</Text>
+			<Text style={{ marginBottom: 10, fontSize: 18 }}>{label}</Text>
 			<TextInput 
 			 	placeholder={placeholder} 
 			 	style={styles.inputStyle} 
