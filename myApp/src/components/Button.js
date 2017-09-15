@@ -5,7 +5,14 @@ export default class Button extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { text: this.props.text, switch: false }
+		this.state = { text: this.props.text, switch: false, user: [] }
+	}
+
+	componentDidMount() {
+		fetch('https://randomuser.me/api/')
+			.then((user) => user.json())
+			.then(({ results }) => this.setState({ user: results}))
+			.catch((err) => console.log(err));	
 	}
 
 	onButtonPress() {
@@ -13,12 +20,13 @@ export default class Button extends Component {
 	}
 
 	render() {
+		console.log(this.state.user)
 		return (
-			<View>
+			<View style={styles.view}>
 				<TouchableHighlight onPress={this.onButtonPress.bind(this)} style={styles.button}
 					underlayColor="red"
 				>
-					<Text>{this.state.text}</Text>
+					<Text>{this.state.text} {this.state.user.nat}</Text>
 				</TouchableHighlight>
 				<Switch 
 					value={this.state.switch} 
@@ -31,6 +39,9 @@ export default class Button extends Component {
 };
 
 const styles = {
+	view: {
+		marginTop: 30
+	},
 	button: {
 		backgroundColor: 'pink',
 		padding: 10,
